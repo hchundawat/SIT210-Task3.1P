@@ -1,0 +1,23 @@
+
+#include <Adafruit_DHT.h>   // library used
+#define DHTPIN D6          // pin in which sensor is connected 
+#define DHTTYPE DHT22      // type of sensor
+
+String temp;
+DHT dht(DHTPIN, DHTTYPE);
+void setup() {
+    dht.begin();
+}
+
+void loop() {
+    
+    
+    delay(30000);   // wait 30 sec
+    
+    float t = dht.getTempCelcius();  // read temp from sensor
+    
+    
+    temp = String::format("%.1f %",t);
+    Particle.publish("temp", temp);
+
+}
